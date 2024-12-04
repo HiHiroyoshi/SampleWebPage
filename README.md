@@ -23,7 +23,7 @@ classやstyleといった記載があるはずです。
 文字の大きさと種類を変えてみる。
 高さと幅と背景の色を変える。
 
-課題3）id(identity)とclassとStyleの違いを調べてみましょう。
+課題3）id(identity)とclassとstyleの違いを調べてみましょう。
 どういった違いがあるのか。
 また、classの中にclassを設けてみましょう。
 
