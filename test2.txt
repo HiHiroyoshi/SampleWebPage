@@ -1,0 +1,292 @@
+<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="Shanaikitei_Syoukai2.aspx.vb" Inherits="ShanaiKiteiSyoukai.Shanaikitei_Syoukai2" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    
+    <style>
+        /* スクロールバーを含むコンテナ */
+        .scrollable-container {
+            width: 940px;
+            overflow-x: auto;
+            border: 1px solid #ccc;
+        }
+
+        /* GridViewの幅 */
+        .gridview-table {
+            width: 1500px;
+        }
+
+        /* スクロールバーのカスタマイズ */
+        .scrollable-container::-webkit-scrollbar {
+            height: 30px; /* 横スクロールバーの高さ */
+        }
+
+        .scrollable-container::-webkit-scrollbar-track {
+            background: #f1f1f1; /* スクロールバーの背景 */
+        }
+
+        .scrollable-container::-webkit-scrollbar-thumb {
+            background: #888; /* スクロールバーのつまみ */
+            border-radius: 8px; /* 角を丸くする */
+        }
+
+        .scrollable-container::-webkit-scrollbar-thumb:hover {
+            background: #555; /* マウスホバー時の色 */
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div style="width:940px">
+         <table style="width:940px">
+             <tr>
+                 <td class="capton"><style style="color:red">社内規程管理 照会</style></td>
+             </tr>
+         </table>
+         <table>
+                 <tr>
+                     <td><h4>メッセージ</h4></td>
+                 </tr>
+                 <tr>
+                     <td style="width:940px">
+                         <asp:TextBox ID="txtMsg" runat="server" Width="940px" Height="30px" Text="TEST" ReadOnly="true"></asp:TextBox>
+                     </td>
+                 </tr>
+         </table>
+         <table id="basicInformation" runat="server" style="width:940px">
+             <tr>
+                 <td class="caption">基本情報</td>
+             </tr>
+         </table>
+        <table style="font-size:11px;width:940px;">            
+            
+            <tr>
+                <td style="width:100px">規程No</td>
+                <td style="width:120px">
+                    <asp:Label ID="lblKiteiNo" Text="YES1999W-02L" runat="server"></asp:Label>
+                </td>
+                <td style="width:100px">規程名</td>
+                <td colspan="2" style="width:220px">
+                    <asp:Label ID="lblBasicName" Text="社内規定管理規程" runat="server"></asp:Label>
+                </td>
+                <td style="width:100px">原案作成部署</td>
+                <td colspan="2" style="width:200px">【事業部】システム</td>
+            </tr>
+            <tr>
+                <td style="width:100px">規程</td>
+                <td colspan="4">
+                    <asp:LinkButton ID="lnkBasicKitei" Text="YES1999-02L" runat="server"></asp:LinkButton>
+                </td>
+                <td style="width:100px">改訂解説書</td>
+                <td colspan="2">
+                    <asp:LinkButton ID="lnbBasicRenNewDocument" Text="YES1999W-02L_改訂解説書_配布先変更" runat="server"></asp:LinkButton>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" style="width:450px">
+                    <asp:GridView ID="gvBasicTyouhyourui" AutoGenerateColumns="false" runat="server">
+                        <Columns>
+                            <asp:TemplateField>
+                                <ItemStyle Width="430px" />
+                                <HeaderTemplate>帳票類</HeaderTemplate>
+                                <ItemTemplate>
+                                    <asp:LinkButton ID="lnbBasicTyouhyourui" Text='<%# Bind("BasicTyouhyourui") %>' runat="server"></asp:LinkButton>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                        </Columns>
+                    </asp:GridView>
+                </td>
+                <td colspan="4" style="width:450px">
+                    <asp:GridView ID="gvBasicLinks" AutoGenerateColumns="false" runat="server">
+                        <Columns>
+                            <asp:TemplateField>
+                                <ItemStyle Width="430px" />
+                                <HeaderTemplate>リンク</HeaderTemplate>
+                                <ItemTemplate>
+                                    <asp:HiddenField ID="hdnBasicLinks" Value='<%# Bind("BasicLink") %>' runat="server" />
+                                    <asp:LinkButton ID="lnbBasicLinks" Text='<%# Bind("BasicLink") %>'  runat="server"></asp:LinkButton>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                        </Columns>
+                    </asp:GridView>
+                </td>
+            </tr>
+            <tr>
+                <td style="width:100px">制定日</td>
+                <td style="width:120px"><asp:Label ID="lblBasicStartDate" runat="server" Text="2024/08/01"></asp:Label></td>
+                <td style="width:100px">改廃日</td>
+                <td style="width:120px"><asp:Label ID="lblBasicRenewalDate" runat="server" Text="2027/08/01"></asp:Label></td>
+                <td style="width:100px"></td>
+                <td style="width:100px">次回改廃日</td>
+                <td colspan="2" style="width:200px"><asp:Label ID="lblBasicNextReNewalDate" runat="server" Text="2030/08/01"></asp:Label></td>
+                
+            </tr>
+            <tr>
+                <td style="width:100px">改廃進捗</td>
+                <td style="width:120px">
+                    <asp:Label ID="lblStatus" Text="審議部署:まとめ" runat="server"></asp:Label>
+                </td>
+                <td style="width:100px">作成者</td>
+                <td style="width:120px">
+                    <asp:Label ID="lblBasicCreator" Text="大河内奈々子" runat="server"></asp:Label>
+                </td>
+                <td style="width:100px">確認者</td>
+                <td style="width:100px">
+                    <asp:Label ID="lblBasicCheckPerson" Text="平田三加茂" runat="server"></asp:Label>
+                </td>
+                <td style="width:100px">承認者</td>
+                <td style="width:100px">
+                    <asp:Label ID="lblBasicApprovalPerson" Text="望月純一郎" runat="server"></asp:Label>
+                </td>
+            </tr>
+            
+        </table>
+        <table style="width:940px">
+            <tr>
+                <td style="caption">配布先の残課題</td>
+            </tr>
+        </table>
+        <table style="font-size:11px;width:940px;">
+            <tr>
+                <td>
+                    <asp:GridView ID="gvRecieversHomework" AutoGenerateColumns="false" runat="server">
+                        <Columns>
+                            <asp:TemplateField>
+                                <ItemStyle Width="300px" />
+                                <HeaderTemplate>規程No</HeaderTemplate>
+                                <ItemTemplate>
+                                    <asp:HiddenField ID="hdnReceiversHomeworkId" Value='<%# Bind("HOMEWORK_ID") %>' runat="server" />
+                                    <asp:LinkButton ID="lnbReceiversHomeworkNo" Text='<%# Bind("HOMEWORK_NO") %>' runat="server"></asp:LinkButton>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField>
+                                <ItemStyle Width="300px" />
+                                <HeaderTemplate>規程名</HeaderTemplate>
+                                <ItemTemplate>
+                                    <asp:Label ID="lblKiteiName" Text='<%# Bind("HOMEWORK_NAME") %>' runat="server"></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField>
+                                <ItemStyle Width="300px" />
+                                <HeaderTemplate>原案作成</HeaderTemplate>
+                                <ItemTemplate>
+                                    <asp:Label ID="lblChargeOrganization" Text='<%# Bind("CHARGE_ORG_NAME") %>' runat="server"></asp:Label>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                        </Columns>
+                    </asp:GridView>
+                </td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td>審議先情報</td>
+            </tr>
+        </table>
+        <table style="font-size:11px">
+            <tr>
+                <td style="text-align:right;">審議結果：〇 承認、△条件付き承認、×否認</td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:GridView ID="gvReviewInformation" runat="server" AutoGenerateColumns="false">
+                        <Columns>
+                            <asp:TemplateField>
+                                <HeaderTemplate>分類</HeaderTemplate>
+                                <ItemTemplate>
+                                    <asp:Label ID="lblReviewDivision" Text="審議" runat="server"></asp:Label>
+                                </ItemTemplate>
+                                <ItemStyle Width="40px" HorizontalAlign="Center" />
+                            </asp:TemplateField>
+                            <asp:TemplateField>
+                                <HeaderTemplate>区分</HeaderTemplate>
+                                <ItemTemplate>
+                                    <asp:Label ID="lblReviewGroup" Text="開発スタジアム" runat="server"></asp:Label>
+                                </ItemTemplate>
+                                <ItemStyle Width="120px" />
+                            </asp:TemplateField>
+                            <asp:TemplateField>
+                                <HeaderTemplate>審議部署</HeaderTemplate>
+                                <ItemTemplate>
+                                    <asp:Label ID="lblReviewOrganization" Text="分岐エンジニアリング部" runat="server"></asp:Label>
+                                </ItemTemplate>
+                                <ItemStyle Width="200px" />
+                            </asp:TemplateField>
+                            <asp:TemplateField>
+                                <HeaderTemplate>作成者</HeaderTemplate>
+                                <ItemTemplate>
+                                    <asp:Label ID="lblReviewCreator" Text="小早川一二三" runat="server"></asp:Label>
+                                </ItemTemplate>
+                                <ItemStyle Width="100px" />
+                            </asp:TemplateField>
+                            <asp:TemplateField>
+                                <HeaderTemplate>確認者</HeaderTemplate>
+                                <ItemTemplate>
+                                    <asp:Label ID="lblReviewCheckPerson" Text="一二三四五六" runat="server"></asp:Label>
+                                </ItemTemplate>
+                                <ItemStyle Width="100px" />
+                            </asp:TemplateField>
+                            <asp:TemplateField>
+                                <HeaderTemplate>承認者</HeaderTemplate>
+                                <ItemTemplate>
+                                    <asp:Label ID="lblReviewApprovalPerson" Text="四五六一二三" runat="server"></asp:Label>
+                                </ItemTemplate>
+                                <ItemStyle Width="100px" />
+                            </asp:TemplateField>
+                            <asp:TemplateField>
+                                <HeaderTemplate>審議結果</HeaderTemplate>
+                                <ItemTemplate>
+                                    <asp:Label ID="lblReviewResult" Text="〇" runat="server"></asp:Label>
+                                </ItemTemplate>
+                                <ItemStyle Width="80px" HorizontalAlign="Center" />
+                            </asp:TemplateField>
+                            <asp:TemplateField>
+                                <HeaderTemplate>配布先要否</HeaderTemplate>
+                                <ItemTemplate>
+                                    <asp:Label ID="lblReviewNotNeed" Text="不要" ToolTip="DisplayNotNeedReason" runat="server"></asp:Label>
+                                </ItemTemplate>
+                                <ItemStyle Width="80px" HorizontalAlign="Center" />
+                            </asp:TemplateField>
+                            <asp:TemplateField>
+                                <HeaderTemplate>原案回答</HeaderTemplate>
+                                <ItemTemplate>
+                                    <asp:Label ID="lblReviewChargeAnswer" Text="必要" runat="server"></asp:Label>
+                                </ItemTemplate>
+                                <ItemStyle Width="80px" HorizontalAlign="Center" />
+                            </asp:TemplateField>                            
+
+                        </Columns>
+                    </asp:GridView>
+                </td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td class="caption">審議結果まとめ</td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td>
+                    <div class="scrollable-container"></div>
+                    <asp:GridView ID="gvReviewResultSummary" CssClass="gridview-table"  AutoGenerateColumns="false" runat="server">
+                        <Columns>
+                                    <asp:BoundField DataField="ID" HeaderText="ID" />
+                                    <asp:BoundField DataField="Name" HeaderText="Name" />
+                                    <asp:BoundField DataField="Email" HeaderText="Email" />
+                                    <asp:BoundField DataField="Phone" HeaderText="Phone" />
+                                    <asp:BoundField DataField="Address" HeaderText="Address" />
+                                </Columns>
+                    </asp:GridView>
+                </td>
+            </tr>
+        </table>
+    
+        </div>
+    </form>
+</body>
+</html>
